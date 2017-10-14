@@ -9,19 +9,32 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 import os
 import dj_database_url
 
+from django.core.exceptions import ImproperlyConfigured
+
 from unipath import Path
+from dotenv import load_dotenv
+
+
+def get_key(key):
+    value = os.environ.get(key)
+    if not value:
+        raise ImproperlyConfigured('{} key is not set!'.format(key))
+    return value
 
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = Path(__file__).ancestor(2)
-PROJECT_ROOT = Path(__file__).ancestor(1)
+BASE_DIR = Path(__file__).ancestor(3)
+PROJECT_ROOT = Path(__file__).ancestor(2)
 
+# dotenv path
+dotenv_path = BASE_DIR.child('.env')
+load_dotenv(dotenv_path, verbose=True)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
 
 # SECURITY WARNING: change this before deploying to production!
-SECRET_KEY = 'i+acxn5(akgsn!sr4^qgf(^m&*@+g1@u^t@=8s@axc41ml*f=s'
+SECRET_KEY = get_key('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -36,6 +49,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'index',
 )
 
 MIDDLEWARE_CLASSES = (
