@@ -26,9 +26,10 @@ def get_key(key):
 BASE_DIR = Path(__file__).ancestor(3)
 PROJECT_ROOT = Path(__file__).ancestor(2)
 
-# dotenv path
+# load dotenv file if it exists
 dotenv_path = BASE_DIR.child('.env')
-load_dotenv(dotenv_path, verbose=True)
+if dotenv_path.exists():
+    load_dotenv(dotenv_path, verbose=True)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
