@@ -17,7 +17,7 @@ from dotenv import load_dotenv
 
 def get_key(key):
     value = os.environ.get(key)
-    if not value:
+    if value == None:
         raise ImproperlyConfigured('{} key is not set!'.format(key))
     return value
 
@@ -132,7 +132,7 @@ DATABASES['default'].update(db_from_env)
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 # Allow all host headers
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '[::1]']
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
