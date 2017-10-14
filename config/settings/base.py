@@ -34,8 +34,7 @@ load_dotenv(dotenv_path, verbose=True)
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
 
 # SECURITY WARNING: change this before deploying to production!
-SECRET_KEY = get_key('SECRET_KEY')
-
+SECRET_KEY = 'sample_secret_key'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
