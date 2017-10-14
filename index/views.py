@@ -1,10 +1,11 @@
 from django.shortcuts import render
-from django.views import View
-from django.http import HttpResponse
+from django.views.generic import TemplateView
+
+from .chuck import Chuck
 
 
-class IndexView(View):
-    def get(self, request):
-        return HttpResponse('''
-            <h1>Don\'t know what to do with this site yet.</h1>
-        ''')
+def index(request):
+    chuck = Chuck()
+    return render(request, 'index/index.html', {
+        'fact': chuck.get_random_fact(),
+    })

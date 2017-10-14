@@ -1,7 +1,7 @@
 from .base import *
 
 
-DEBUG = False
+DEBUG = True
 DATABASES['default'] = {
     'ENGINE': get_key('DB_ENGINE'),
     'NAME': get_key('DB_NAME'),

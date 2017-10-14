@@ -1,0 +1,9 @@
+{% extends 'admin/base.html' %}
+  
+{% block title %}{{ title }} | CMS | Erika Suzuki{% endblock %}
+
+{% block branding %}
+<h1 id="title"><a href="{% url 'admin:index' %}"><a href="{{ request.host }}">Erika Suzuki</a> CMS</a></h1>
+{% endblock %}
+
+{% block nav-global %}{% endblock %}

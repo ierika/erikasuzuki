@@ -40,9 +40,7 @@ SECRET_KEY = get_key('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-
 # Application definition
-
 INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.auth',
@@ -69,7 +67,7 @@ ROOT_URLCONF = 'config.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR.child('templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'debug': True,
@@ -136,16 +134,16 @@ ALLOWED_HOSTS = ['localhost', '127.0.0.1', '[::1]']
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
-
-STATIC_ROOT = PROJECT_ROOT.child('staticfiles')
+STATIC_ROOT = BASE_DIR.child('staticfiles')
+STATICFILES_DIRS = [
+    BASE_DIR.child('assets'),
+]
 STATIC_URL = '/static/'
-
-# Extra places for collectstatic to find static files.
-STATICFILES_DIRS = (
-    PROJECT_ROOT.child('static'),
-)
 
 # Simplified static file serving.
 # https://warehouse.python.org/project/whitenoise/
 STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
+# Media files
+MEDIA_ROOT = BASE_DIR.child('media')
+MEDIA_URL = '/media/'
