@@ -108,3 +108,4 @@ venv.bak/
 # My additions
 db.sqlite3
 .sass-cache
+staticfiles/
