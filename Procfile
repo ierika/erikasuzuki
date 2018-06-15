@@ -1,2 +1,2 @@
-web: python manage.py collectstatic --no-input
+web: python manage.py collectstatic --no-inputrm -
 web: gunicorn config.wsgi --log-file -
