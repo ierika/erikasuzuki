@@ -5,19 +5,16 @@ import requests
 from unipath import Path
 from dotenv import load_dotenv
 
-from flask import Flask
-from flask import jsonify
-from flask import session
+from flask import Flask, render_template, jsonify, session
 from flask_session import Session
 
 
 load_dotenv(Path(__file__).ancestor(1).child('.env'))
 
 app = Flask(__name__)
-app.config['SESSION_TYPE'] = "filesystem"
-app.config['SECRET_KEY'] = os.getenv("SECRET_KEY")
+app.config["SESSION_TYPE"] = "filesystem"
+app.config["SECRET_KEY"] = os.getenv("SECRET_KEY")
 Session(app)
-app.debug = True
 
 
 @app.before_request
@@ -27,14 +24,25 @@ def make_session_permanent():
 
 
 @app.route("/")
-def index():
+def index_view():
     """Retrieve JSON response from Treehouse and render"""
 
-    return "Hello world"
+    profile = profile_view().get_json()
+
+    context = {
+        "points": sorted(
+            profile['points'].items(),
+            key=lambda x: x[1],
+            reverse=True,
+        ),
+        "gravatar_url": profile['gravatar_url'],
+    }
+
+    return render_template("index.html", **context)
 
 
 @app.route("/profile.json")
-def profile():
+def profile_view():
     """Retrieve Treehouse profile payload"""
 
     cache_name = "treehouse_profile"
