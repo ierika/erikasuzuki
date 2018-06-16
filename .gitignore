@@ -108,6 +108,6 @@ venv.bak/
 # My additions
 db.sqlite3
 .sass-cache
-staticfiles/.idea
-
+staticfiles/
+flask_session
 .idea
